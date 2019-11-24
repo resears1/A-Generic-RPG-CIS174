@@ -650,6 +650,14 @@
       <Project>{95229099-F0AE-E127-9521-EC4F65448F41}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="SuperTiled2UnityEditor.csproj">
+      <Project>{507B19EB-BAF7-5D72-5CA6-89FA9030E580}</Project>
+      <Name>SuperTiled2UnityEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="SuperTiled2Unity.csproj">
+      <Project>{BB573C77-2BE0-972C-E938-4842069D91D7}</Project>
+      <Name>SuperTiled2Unity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
 
     private Animator animate;
+    private Rigidbody2D myRigidbody;
 
     private bool isPlayerMoving;
     private Vector2 lastMove;
@@ -15,24 +16,37 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         animate = GetComponent<Animator>();
+        myRigidbody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         isPlayerMoving = false;
 
-        if (Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical") < 0)
+        if (Input.GetAxisRaw("Vertical") > 0.5 || Input.GetAxisRaw("Vertical") < -0.5)
         {
-            transform.Translate(new Vector2(0f, Input.GetAxisRaw("Vertical") * speed * Time.deltaTime));
+            // transform.Translate(new Vector2(0f, Input.GetAxisRaw("Vertical") * speed * Time.deltaTime));
+            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, Input.GetAxisRaw("Vertical") * speed);
             isPlayerMoving = true;
             lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical"));
         }
 
-        if (Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal") < 0)
+        if (Input.GetAxisRaw("Horizontal") > 0.5 || Input.GetAxisRaw("Horizontal") < -0.5)
         {
-            transform.Translate (new Vector2(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0f));
+            // transform.Translate (new Vector2(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0f));
+            myRigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, myRigidbody.velocity.y);
             isPlayerMoving = true;
             lastMove = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
+        }
+
+        if(Input.GetAxisRaw("Horizontal") < 0.5 && Input.GetAxisRaw("Horizontal") > -0.5)
+        {
+            myRigidbody.velocity = new Vector2(0f, myRigidbody.velocity.y);
+        }
+
+        if (Input.GetAxisRaw("Vertical") < 0.5 && Input.GetAxisRaw("Vertical") > -0.5)
+        {
+            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, 0f);
         }
 
         animate.SetFloat("MovementY", Input.GetAxisRaw("Vertical"));

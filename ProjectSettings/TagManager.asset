@@ -47,3 +47,9 @@ TagManager:
   - name: Player
     uniqueID: 1523812791
     locked: 0
+  - name: WorldObjects
+    uniqueID: 494985727
+    locked: 0
+  - name: Collision
+    uniqueID: 274736791
+    locked: 0
