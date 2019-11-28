@@ -196,6 +196,66 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6342902553090328192, guid: 0eac58556a5c36b46bf44420b7ea38a1,
+        type: 3}
+      propertyPath: m_DetectChunkCullingBounds
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6342902553090328192, guid: 0eac58556a5c36b46bf44420b7ea38a1,
+        type: 3}
+      propertyPath: m_ChunkCullingBounds.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6342902553090328192, guid: 0eac58556a5c36b46bf44420b7ea38a1,
+        type: 3}
+      propertyPath: m_ChunkCullingBounds.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6342902553090328192, guid: 0eac58556a5c36b46bf44420b7ea38a1,
+        type: 3}
+      propertyPath: m_ChunkCullingBounds.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566361548212987155, guid: 0eac58556a5c36b46bf44420b7ea38a1,
+        type: 3}
+      propertyPath: m_DetectChunkCullingBounds
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566361548212987155, guid: 0eac58556a5c36b46bf44420b7ea38a1,
+        type: 3}
+      propertyPath: m_ChunkCullingBounds.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566361548212987155, guid: 0eac58556a5c36b46bf44420b7ea38a1,
+        type: 3}
+      propertyPath: m_ChunkCullingBounds.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566361548212987155, guid: 0eac58556a5c36b46bf44420b7ea38a1,
+        type: 3}
+      propertyPath: m_ChunkCullingBounds.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702611708754132044, guid: 0eac58556a5c36b46bf44420b7ea38a1,
+        type: 3}
+      propertyPath: m_DetectChunkCullingBounds
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702611708754132044, guid: 0eac58556a5c36b46bf44420b7ea38a1,
+        type: 3}
+      propertyPath: m_ChunkCullingBounds.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702611708754132044, guid: 0eac58556a5c36b46bf44420b7ea38a1,
+        type: 3}
+      propertyPath: m_ChunkCullingBounds.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702611708754132044, guid: 0eac58556a5c36b46bf44420b7ea38a1,
+        type: 3}
+      propertyPath: m_ChunkCullingBounds.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: -2695619058785784247, guid: 0eac58556a5c36b46bf44420b7ea38a1,
     type: 3}
