@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Debug\netcoreapp2.1\cis174GameWebSite.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\netcoreapp2.1\cis174GameWebSite.RazorAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="obj\cis174GameWebSite.csproj.nuget.dgspec.json" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="obj\cis174GameWebSite.csproj.nuget.cache" />
+    <None Include="obj\cis174GameWebSite.csproj.nuget.g.props" />
+    <None Include="obj\cis174GameWebSite.csproj.nuget.g.targets" />
+    <None Include="obj\Debug\netcoreapp2.1\cis174GameWebSite.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.1\cis174GameWebSite.assets.cache" />
+    <None Include="obj\Debug\netcoreapp2.1\cis174GameWebSite.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\netcoreapp2.1\cis174GameWebSite.RazorAssemblyInfo.cache" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+    <PackageReference Include="Seq.Extensions.Logging" Version="2.1.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="2.1.0" />
+  </ItemGroup>
+
+</Project>
