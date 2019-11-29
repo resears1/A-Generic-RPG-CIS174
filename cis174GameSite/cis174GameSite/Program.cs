@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace cis174GameSite
 {
@@ -14,11 +15,30 @@ namespace cis174GameSite
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
+            try
+            {
+                CreateWebHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseSerilog()
+                .ConfigureLogging((ctx, builder) =>
+                {
+                    builder.AddConfiguration(
+                        ctx.Configuration.GetSection("Logging"));
+                    builder.AddConsole();
+                })
                 .UseStartup<Startup>()
                 .Build();
     }
