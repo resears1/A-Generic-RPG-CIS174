@@ -31,16 +31,6 @@ public class SlimeController : MonoBehaviour
         timeToMoveCounter = Random.Range(timeToMove * 0.75f, timeToMove * 1.25f);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.name == "Player")
-        {
-            collision.gameObject.SetActive(false);
-            isReloading = true;
-            player = collision.gameObject;
-        }
-    }
-
     void Update()
     {
         if (isMoving)
