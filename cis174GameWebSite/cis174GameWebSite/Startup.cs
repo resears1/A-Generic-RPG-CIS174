@@ -66,7 +66,6 @@ namespace cis174GameWebSite
 
             app.UseStaticFiles();
 
-            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
