@@ -326,6 +326,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7711013013217647615, guid: 45e6895a6ee783e4099fa8ab0744b03c,
+        type: 3}
+      propertyPath: pointName
+      value: Test House In
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45e6895a6ee783e4099fa8ab0744b03c, type: 3}
 --- !u!1001 &1221265092
@@ -399,6 +404,11 @@ PrefabInstance:
         type: 3}
       propertyPath: level
       value: main
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959825775008412735, guid: 3c5faa81b675ac748ab6a7c7da0ccce6,
+        type: 3}
+      propertyPath: exitPoint
+      value: Test House Out
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c5faa81b675ac748ab6a7c7da0ccce6, type: 3}

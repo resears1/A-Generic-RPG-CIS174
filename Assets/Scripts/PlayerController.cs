@@ -11,13 +11,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D myRigidbody;
 
     private bool isPlayerMoving;
-    private Vector2 lastMove;
+    public Vector2 lastMove;
 
     private static bool doesPlayerExist;
 
     private bool attacking;
     public float attackTime;
     private float attackTimeCounter;
+
+    public string startPoint;
 
     void Start()
     {
