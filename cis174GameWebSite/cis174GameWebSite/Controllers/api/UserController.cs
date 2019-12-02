@@ -39,17 +39,6 @@ namespace cis174GameWebSite.Controllers.api
         [TempData]
         public string ErrorMessage { get; set; }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login(string returnUrl = null)
-        {
-            // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
         [HttpPost]
         [AllowAnonymous]
         [Route("login")]
@@ -64,7 +53,7 @@ namespace cis174GameWebSite.Controllers.api
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return Ok("Login successful");
+                    return Ok(model);
                 }
                 if (result.IsLockedOut)
                 {
@@ -74,12 +63,14 @@ namespace cis174GameWebSite.Controllers.api
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    _logger.LogError("Invalid login attempt");
                     return BadRequest("Invalid attempt");
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            _logger.LogWarning("Login failed, invalid");
+            return BadRequest("Invalid attempt");
         }
 
         // POST: api/Register
@@ -103,9 +94,11 @@ namespace cis174GameWebSite.Controllers.api
                     _logger.LogInformation("User created a new account with password.");
                     return Ok(model);
                 }
+                _logger.LogError("Could not register");
                 return BadRequest();
             }
 
+            _logger.LogError("Invalid model issue");
             // If we got this far, something failed, redisplay form
             return BadRequest();
         }
@@ -115,7 +108,8 @@ namespace cis174GameWebSite.Controllers.api
         [Route("lockout")]
         public IActionResult Lockout()
         {
-            return View();
+            _logger.LogError("Locked out");
+            return Ok("Locked out");
         }
 
         [HttpPost]
@@ -135,11 +129,13 @@ namespace cis174GameWebSite.Controllers.api
             if (remoteError != null)
             {
                 ErrorMessage = $"Error from external provider: {remoteError}";
-                return BadRequest("Error from external provider: {remoteError}");
+                _logger.LogError($"Error from external provider: {remoteError}");
+                return BadRequest("Error from external provider");
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
+                _logger.LogWarning("Info is empty");
                 return BadRequest("Info is empty");
             }
 
@@ -152,6 +148,7 @@ namespace cis174GameWebSite.Controllers.api
             }
             if (result.IsLockedOut)
             {
+                _logger.LogWarning("User locked out");
                 return BadRequest("User locked out");
             }
             else
@@ -160,20 +157,9 @@ namespace cis174GameWebSite.Controllers.api
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                _logger.LogWarning("No account found, please create an account");
                 return BadRequest("No account found, please create an account");
             }
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        [Route("extLogin")]
-        public IActionResult ExternalLogin(string provider, string returnUrl = null)
-        {
-            // Request a redirect to the external login provider.
-            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { returnUrl });
-            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
-            return Challenge(properties, provider);
         }
 
         [HttpPost]
@@ -188,6 +174,7 @@ namespace cis174GameWebSite.Controllers.api
                 var info = await _signInManager.GetExternalLoginInfoAsync();
                 if (info == null)
                 {
+                    _logger.LogError("Error loading external login information during confirmation.");
                     throw new ApplicationException("Error loading external login information during confirmation.");
                 }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -204,42 +191,8 @@ namespace cis174GameWebSite.Controllers.api
                 }
                 return BadRequest("Login failed");
             }
-
+            _logger.LogWarning("Login failed, invalid");
             return BadRequest("Login failed, invalid");
         }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult ForgotPassword()
-        {
-            return View();
-        }
-
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await _userManager.FindByEmailAsync(model.Email);
-        //        if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
-        //        {
-        //            // Don't reveal that the user does not exist or is not confirmed
-        //            return RedirectToAction(nameof(ForgotPasswordConfirmation));
-        //        }
-
-        //        // For more information on how to enable account confirmation and password reset please
-        //        // visit https://go.microsoft.com/fwlink/?LinkID=532713
-        //        var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-        //        var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
-        //        await _emailSender.SendEmailAsync(model.Email, "Reset Password",
-        //           $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
-        //        return RedirectToAction(nameof(ForgotPasswordConfirmation));
-        //    }
-
-        //    // If we got this far, something failed, redisplay form
-        //    return View(model);
-        //}
     }
 }
