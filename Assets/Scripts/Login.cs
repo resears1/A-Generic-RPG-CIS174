@@ -13,6 +13,7 @@ public class Login : MonoBehaviour
     // public static strings to hold text that can be accessed by other scripts
     public static string user;
     public static string pass;
+    public static int UserId;
 
     void Start()
     {
@@ -28,33 +29,54 @@ public class Login : MonoBehaviour
         user = username.text;
         pass = password.text;
 
-        if (user == Register.user && pass == Register.pass)
-        {
-            Debug.Log("Success");
-        } else
-        {
-            Debug.Log("Failure");
-        }
+        
+
+        //Do we need?
+        //if (user == Register.user && pass == Register.pass)
+        //{
+        //    Debug.Log("Success");
+        //} else
+        //{
+        //    Debug.Log("Failure");
+        //}
 
         // Debug information
     }
 
     public IEnumerator getText()
     {
-        UnityWebRequest www = UnityWebRequest.Get("https://cis174gamewebsite.azurewebsites.net/api/register/5");
+        UnityWebRequest www = UnityWebRequest.Post("https://cis174gamewebsite.azurewebsites.net/api/user/login", "{ \"Email\": \"" + user + "\" \"Password\": \"" + pass + "\" \"RememberMe\": \"\"}");
         yield return www.SendWebRequest();
-
         if (www.isNetworkError || www.isHttpError)
         {
             Debug.Log(www.error);
         }
         else
         {
-            // Show results as text
-            Debug.Log(www.downloadHandler.text);
-
-            // Or retrieve results as binary data
-            byte[] results = www.downloadHandler.data;
+            Debug.Log("Form upload complete!");
         }
+
+        while (!www.isDone && (www.error == null || www.error.Equals("")))
+        {
+            Debug.Log(www.downloadProgress + " - " + www.downloadedBytes);
+        }
+        if (www.error != null && !www.error.Equals(""))
+        {
+            Debug.LogError("Request error: " + www.error);
+        }
+        Debug.Log(www.responseCode + " User Successfully Registered");
+
+        //if (www.isNetworkError || www.isHttpError)
+        //{
+        //    Debug.Log(www.error);
+        //}
+        //else
+        //{
+        //    // Show results as text
+        //    Debug.Log(www.downloadHandler.text);
+
+        //    // Or retrieve results as binary data
+        //    byte[] results = www.downloadHandler.data;
+        //}
     }
 }
