@@ -11,12 +11,22 @@ public class Register : MonoBehaviour
     // Variables to hold input field
     public InputField userIn;
     public InputField passIn;
+    public InputField passConfirmIn;
+    public Text errorText;
 
     // public static strings to hold text that can be accessed by other scripts
     public static string user;
     public static string pass;
     public static string UserId;
+    public static string passConfirm;
 
+    // To set an error, you can set errorText.text
+    // Maybe potentially pass in a parameter and concatonate the error for all errors
+    // Like I am doing here. This is being called on line 40 as a placeholder.
+    public void Error(string err)
+    {
+        errorText.text = "Error: " + err;
+    }
     // set static strings to input field text
     // triggered by button onclick event
     public void setUser()
@@ -28,6 +38,13 @@ public class Register : MonoBehaviour
 
     public IEnumerator RegisterUser()
     {
+        passConfirm = passConfirmIn.text;
+
+        // Placeholder to confirm password
+        if (passConfirm != pass)
+        {
+            Error("Passwords do not match.");
+        }
         string send = "{ \"Email\": \"" + user + "\", \"Password\": \"" + pass + "\", \"ConfirmPassword\": \"" + pass + "\" }";
         Debug.Log(send);
         byte[] myData = System.Text.Encoding.UTF8.GetBytes(send);

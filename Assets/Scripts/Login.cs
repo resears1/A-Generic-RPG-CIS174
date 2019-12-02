@@ -11,6 +11,7 @@ public class Login : MonoBehaviour
     // Variables to hold input field
     public InputField username;
     public InputField password;
+    public Text errorText;
 
     // public static strings to hold text that can be accessed by other scripts
     public static string user;
@@ -21,6 +22,15 @@ public class Login : MonoBehaviour
     {
         StartCoroutine(login());
     }
+
+    // To set an error, you can set errorText.text
+    // Maybe potentially pass in a parameter and use string concatonation for each error
+    // This one is currently not being called, unlike Register's version
+    public void Error()
+    {
+        errorText.text = "Error: Insert Error here.";
+    }
+
 
     // set static strings to input field text
     // compare strings to Register script's public static strings

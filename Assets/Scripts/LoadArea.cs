@@ -25,7 +25,7 @@ public class LoadArea : MonoBehaviour
     {
         if (collide.gameObject.name == "Player")
         {
-            SceneManager.LoadScene(level);
+            SceneManager.LoadScene("main");
             player.startPoint = exitPoint;
         }
     }
