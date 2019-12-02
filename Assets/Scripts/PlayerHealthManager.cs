@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -19,7 +20,7 @@ public class PlayerHealthManager : MonoBehaviour
         if (hpCurrent <= 0)
         {
             gameObject.SetActive(false);
-            Upload();
+            InsertNewScore();
         }
     }
 
@@ -33,21 +34,31 @@ public class PlayerHealthManager : MonoBehaviour
         hpCurrent = hpMax;
     }
 
-    IEnumerator Upload()
+    IEnumerator InsertNewScore()
     {
-        WWWForm form = new WWWForm();
-        form.AddField("myField", "myData");
-
-        UnityWebRequest www = UnityWebRequest.Post("https://cis174gamewebsite.azurewebsites.net/api/HighScore/addscore", "{ \"Score\": \"" + Score.score + "\" \"UserId\": \"" + Login.user + "\" }");
+        string UserId;
+        if(Login.UserId != null)
+        {
+            UserId = Login.UserId;
+        } 
+        else
+        {
+            UserId = Register.UserId;
+        }
+        string send = "{ \"Score\": \"" + Score.score + "\" \"UserId\": \"" + UserId + "\" }";
+        Debug.Log(send);
+        byte[] myData = System.Text.Encoding.UTF8.GetBytes(send);
+        UnityWebRequest www = UnityWebRequest.Put("https://cis174gamewebsite.azurewebsites.net/api/HighScore/addscore", myData);
+        www.SetRequestHeader("Content-Type", "application/json");
         yield return www.SendWebRequest();
 
         if (www.isNetworkError || www.isHttpError)
         {
-            Debug.Log(www.error);
+            Debug.Log("Could not add new score - " + www.error);
         }
         else
         {
-            Debug.Log("Form upload complete!");
+            Debug.Log("New Score Inserted!");
         }
     }
 }

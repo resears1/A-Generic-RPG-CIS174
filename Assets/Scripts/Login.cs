@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using Newtonsoft.Json.Linq;
 
 public class Login : MonoBehaviour
 {
@@ -13,11 +15,11 @@ public class Login : MonoBehaviour
     // public static strings to hold text that can be accessed by other scripts
     public static string user;
     public static string pass;
-    public static int UserId;
+    public static string UserId;
 
     void Start()
     {
-        StartCoroutine(getText());
+        StartCoroutine(login());
     }
 
     // set static strings to input field text
@@ -28,55 +30,43 @@ public class Login : MonoBehaviour
     {
         user = username.text;
         pass = password.text;
-
-        
-
-        //Do we need?
-        //if (user == Register.user && pass == Register.pass)
-        //{
-        //    Debug.Log("Success");
-        //} else
-        //{
-        //    Debug.Log("Failure");
-        //}
-
-        // Debug information
+        StartCoroutine(login());
     }
 
-    public IEnumerator getText()
+    public IEnumerator login()
     {
-        UnityWebRequest www = UnityWebRequest.Post("https://cis174gamewebsite.azurewebsites.net/api/user/login", "{ \"Email\": \"" + user + "\" \"Password\": \"" + pass + "\" \"RememberMe\": \"\"}");
+        string send = "{ \"Email\": \"" + user + "\", \"Password\": \"" + pass + "\", \"RememberMe\": \"false\" }";
+        Debug.Log(send);
+        byte[] myData = System.Text.Encoding.UTF8.GetBytes(send);
+        UnityWebRequest www = UnityWebRequest.Put("https://cis174gamewebsite.azurewebsites.net/api/user/login", myData);
+        www.SetRequestHeader("Content-Type", "application/json");
         yield return www.SendWebRequest();
+
         if (www.isNetworkError || www.isHttpError)
         {
             Debug.Log(www.error);
         }
         else
         {
-            Debug.Log("Form upload complete!");
-        }
+            Debug.Log("Upload complete!");
 
-        while (!www.isDone && (www.error == null || www.error.Equals("")))
-        {
-            Debug.Log(www.downloadProgress + " - " + www.downloadedBytes);
-        }
-        if (www.error != null && !www.error.Equals(""))
-        {
-            Debug.LogError("Request error: " + www.error);
-        }
-        Debug.Log(www.responseCode + " User Successfully Registered");
+            string json = www.downloadHandler.text;
+            JArray parsedArray = JArray.Parse(json);
+            foreach (JObject parsedObject in parsedArray.Children<JObject>())
+            {
+                foreach (JProperty parsedProperty in parsedObject.Properties())
+                {
+                    string propertyName = parsedProperty.Name;
+                    if (propertyName.Equals("id"))
+                    {
+                        string propertyValue = (string)parsedProperty.Value;
+                        UserId = propertyValue;
+                        Debug.Log(UserId);
+                        break;
+                    }
+                }
+            }
 
-        //if (www.isNetworkError || www.isHttpError)
-        //{
-        //    Debug.Log(www.error);
-        //}
-        //else
-        //{
-        //    // Show results as text
-        //    Debug.Log(www.downloadHandler.text);
-
-        //    // Or retrieve results as binary data
-        //    byte[] results = www.downloadHandler.data;
-        //}
+        }
     }
 }
