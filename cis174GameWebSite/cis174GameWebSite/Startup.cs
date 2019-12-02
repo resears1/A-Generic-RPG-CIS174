@@ -42,6 +42,8 @@ namespace cis174GameWebSite
             services.AddMvc();
             services.AddDbContext<ApplicationDbContext>();
             services.AddScoped<ApplicationDbContext>();
+            services.AddDbContext<HighScoreDbContext>();
+            services.AddScoped<HighScoreDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

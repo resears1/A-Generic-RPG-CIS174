@@ -31,5 +31,6 @@ namespace cis174GameWebSite.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlServer("Server=tcp:cis174person.database.windows.net,1433;Initial Catalog=cis174RpgGame;Persist Security Info=False;User ID=carl;Password=Xukw6774/;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+    
     }
 }
