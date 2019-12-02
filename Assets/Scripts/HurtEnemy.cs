@@ -10,17 +10,6 @@ public class HurtEnemy : MonoBehaviour
     public Transform hitPoint;
     public GameObject damageNumber;
 
-    void Start()
-    {
-        
-    }
-
-
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")

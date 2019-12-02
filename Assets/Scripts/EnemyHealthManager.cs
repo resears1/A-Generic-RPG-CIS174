@@ -18,6 +18,7 @@ public class EnemyHealthManager : MonoBehaviour
         if (enemyHpCurrent <= 0)
         {
             Destroy(gameObject);
+            Score.score += 5;
         }
     }
 
