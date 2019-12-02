@@ -7,9 +7,16 @@ public class EnemyHealthManager : MonoBehaviour
     public int enemyHpMax;
     public int enemyHpCurrent;
 
+    private PlayerStats playerStats;
+
+    public int XP;
+    public int ScoreReward;
+
     void Start()
     {
         enemyHpCurrent = enemyHpMax;
+
+        playerStats = FindObjectOfType<PlayerStats>();
     }
 
 
@@ -18,7 +25,8 @@ public class EnemyHealthManager : MonoBehaviour
         if (enemyHpCurrent <= 0)
         {
             Destroy(gameObject);
-            Score.score += 5;
+            Score.score += ScoreReward;
+            playerStats.AddXP(XP);
         }
     }
 

@@ -186,3 +186,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHpMax: 15
   enemyHpCurrent: 0
+  XP: 5
+  ScoreReward: 5

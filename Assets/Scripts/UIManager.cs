@@ -10,6 +10,11 @@ public class UIManager : MonoBehaviour
     public Text HPText;
     public PlayerHealthManager playerHealth;
 
+    private PlayerStats playerStats;
+    public Text XPText;
+    public Text LvlText;
+    public Slider XPBar;
+
     private static bool UIExist;
 
     // Start is called before the first frame update
@@ -24,6 +29,8 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        playerStats = GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -31,6 +38,10 @@ public class UIManager : MonoBehaviour
     {
         healthBar.maxValue = playerHealth.hpMax;
         healthBar.value = playerHealth.hpCurrent;
+        XPBar.maxValue = playerStats.toNextLvl[playerStats.currentLvl];
+        XPBar.value = playerStats.currentXP;
         HPText.text = "HP: " + playerHealth.hpCurrent + "/" + playerHealth.hpMax;
+        XPText.text = "XP: " + playerStats.currentXP + "/" + playerStats.toNextLvl[playerStats.currentLvl];
+        LvlText.text = "Level: " + playerStats.currentLvl;
     }
 }

@@ -10,7 +10,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     void Start()
     {
-        hpCurrent = hpMax;   
+        hpCurrent = hpMax;
     }
 
 
