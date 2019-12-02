@@ -33,8 +33,9 @@ namespace cis174GameWebSite.Controllers.api
         }
 
         //GET: api/HighScore/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetHighScoresForUser([FromRoute] int id)
+        [HttpGet]
+        [Route("getscores")]
+        public async Task<IActionResult> GetHighScoresForUser([FromBody] HighScoreViewModel highScore)
         {
             if (!ModelState.IsValid)
             {
@@ -42,29 +43,29 @@ namespace cis174GameWebSite.Controllers.api
                 return BadRequest(ModelState);
             }
 
-            var highScoreViewModel = await _context.HighScoreViewModel.FindAsync(id);
+            //var highScoreViewModel = await _context.HighScoreViewModel.FindAsync(id);
 
-            if (highScoreViewModel == null)
+            var highScores = _context.HighScoreViewModel
+                                .Where(a => a.UserId == highScore.UserId)
+                                .Select(a => new HighScoreViewModel
+                                {
+                                    ScoreId = a.ScoreId,
+                                    Score = a.Score,
+                                    UserId = a.UserId,
+                                });
+
+            if (highScores == null)
             {
-                _logger.LogWarning($"Highscores not found {id}");
+                _logger.LogWarning($"Highscores not found {highScore.UserId}");
                 return NotFound();
             }
 
-            _logger.LogInformation($"High Scores retrieved for {id}");
-            return Ok(
-                _context.HighScoreViewModel
-                    .Where(a => a.UserId == id)
-                    .Select(a => new HighScoreViewModel
-                    {
-                        ScoreId = a.ScoreId,
-                        Score = a.Score,
-                        UserId = a.UserId,
-                    })
-                );
+            _logger.LogInformation($"High Scores retrieved for {highScore.UserId}");
+            return Ok(highScores);
         }
 
         // POST: api/HighScore
-        [HttpPost]
+        [HttpPut]
         [Route("addscore")]
         public async Task<IActionResult> PostHighScoreViewModel([FromBody] HighScoreViewModel highScoreViewModel)
         {

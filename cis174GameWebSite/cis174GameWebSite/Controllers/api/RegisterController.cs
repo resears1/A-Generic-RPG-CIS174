@@ -48,7 +48,7 @@ namespace cis174GameWebSite.Controllers.api
         }
         
         // POST: api/Register
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> PostAsync([FromBody]RegisterViewModel model)
         {
             if (ModelState.IsValid)

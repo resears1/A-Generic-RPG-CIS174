@@ -13,6 +13,6 @@ namespace cis174GameWebSite.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ScoreId { get; set; }
         public long Score { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
     }
 }
