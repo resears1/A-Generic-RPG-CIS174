@@ -39,7 +39,7 @@ namespace cis174GameWebSite.Controllers.api
         [TempData]
         public string ErrorMessage { get; set; }
 
-        [HttpPost]
+        [HttpPut]
         [AllowAnonymous]
         [Route("login")]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
@@ -74,7 +74,7 @@ namespace cis174GameWebSite.Controllers.api
         }
 
         // POST: api/Register
-        [HttpPost]
+        [HttpPut]
         [Route("reg")]
         public async Task<IActionResult> PostAsync([FromBody]RegisterViewModel model)
         {
@@ -112,7 +112,7 @@ namespace cis174GameWebSite.Controllers.api
             return Ok("Locked out");
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("logout")]
         public async Task<IActionResult> Logout()
         {
@@ -162,7 +162,7 @@ namespace cis174GameWebSite.Controllers.api
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [Route("extLoginConf")]

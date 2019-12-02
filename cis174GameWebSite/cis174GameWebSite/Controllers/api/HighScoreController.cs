@@ -64,7 +64,7 @@ namespace cis174GameWebSite.Controllers.api
         }
 
         // POST: api/HighScore
-        [HttpPost]
+        [HttpPut]
         [Route("addscore")]
         public async Task<IActionResult> PostHighScoreViewModel([FromBody] HighScoreViewModel highScoreViewModel)
         {
