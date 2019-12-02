@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
 
     public float speed;
+    private float currentSpeed;
+    public float diagonalMoveModifier;
 
     private Animator animate;
     private Rigidbody2D myRigidbody;
@@ -45,13 +47,13 @@ public class PlayerController : MonoBehaviour
             // These two if statements gather input and set the player to moving
             if (Input.GetAxisRaw("Vertical") > 0.5 || Input.GetAxisRaw("Vertical") < -0.5)
             {
-                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, Input.GetAxisRaw("Vertical") * speed);
+                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, Input.GetAxisRaw("Vertical") * currentSpeed);
                 isPlayerMoving = true;
                 lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical"));
             }
             if (Input.GetAxisRaw("Horizontal") > 0.5 || Input.GetAxisRaw("Horizontal") < -0.5)
             {
-                myRigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, myRigidbody.velocity.y);
+                myRigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * currentSpeed, myRigidbody.velocity.y);
                 isPlayerMoving = true;
                 lastMove = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
             }
@@ -67,13 +69,22 @@ public class PlayerController : MonoBehaviour
             }
 
             // Gather input for attack button
-            if (Input.GetKeyDown(KeyCode.J))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
             {
                 attackTimeCounter = attackTime;
                 attacking = true;
-                myRigidbody.velocity = Vector2.zero;
+                myRigidbody.velocity = (myRigidbody.velocity)/10;
                 animate.SetBool("Attack", true);
             }
+        }
+
+        if (Mathf.Abs (Input.GetAxisRaw("Horizontal")) > 0.5f && (Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.5f))
+        {
+            currentSpeed = speed * diagonalMoveModifier;
+        }
+        else
+        {
+            currentSpeed = speed;
         }
 
         if(attackTimeCounter > 0)
