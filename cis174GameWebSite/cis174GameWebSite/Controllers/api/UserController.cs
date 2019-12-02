@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using cis174GameWebSite.Data;
 
 namespace cis174GameWebSite.Controllers.api
 {
@@ -19,17 +20,20 @@ namespace cis174GameWebSite.Controllers.api
     [ApiController]
     public class UserController : Controller
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
 
         public UserController(
+            ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -53,7 +57,14 @@ namespace cis174GameWebSite.Controllers.api
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return Ok(model);
+                    return Ok(
+                            _context.ApplicationUsers
+                                .Where(a => a.UserName == model.Email)
+                                .Select(a => new ApplicationUser
+                                {
+                                    Id = a.Id
+                                })
+                            );
                 }
                 if (result.IsLockedOut)
                 {
@@ -67,6 +78,8 @@ namespace cis174GameWebSite.Controllers.api
                     return BadRequest("Invalid attempt");
                 }
             }
+
+            
 
             // If we got this far, something failed, redisplay form
             _logger.LogWarning("Login failed, invalid");
@@ -92,7 +105,14 @@ namespace cis174GameWebSite.Controllers.api
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-                    return Ok(model);
+                    return Ok(
+                    _context.ApplicationUsers
+                        .Where(a => a.UserName == model.Email)
+                        .Select(a => new ApplicationUser
+                        {
+                            Id = a.Id
+                        })
+                    );
                 }
                 _logger.LogError("Could not register");
                 return BadRequest();
@@ -186,7 +206,14 @@ namespace cis174GameWebSite.Controllers.api
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
-                        return Ok(model);
+                        return Ok(
+                        _context.ApplicationUsers
+                            .Where(a => a.UserName == model.Email)
+                            .Select(a => new ApplicationUser
+                            {
+                                Id = a.Id
+                            })
+                        );
                     }
                 }
                 return BadRequest("Login failed");
