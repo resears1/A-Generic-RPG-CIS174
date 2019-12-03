@@ -80,8 +80,15 @@ public class UIManager : MonoBehaviour
         int i = 0;
         foreach(Text scoreBox in scoreboard)
         {
-            scoreBox.text = scores[i].ToString();
-            i++;
+            if (scores.Count >= (i + 1))
+            {
+                scoreBox.text = scores[i].ToString();
+                i++;
+            }
+            else
+            {
+                scoreBox.text = "0";
+            }
         }
         screenHolder.SetActive(true);
     }
