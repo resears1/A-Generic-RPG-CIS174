@@ -43,6 +43,7 @@ namespace cis174GameWebSite.Controllers.api
             }
 
             var highScores = _context.HighScoreViewModel
+                                .OrderByDescending(a => a.Score).Take(10)
                                 .Where(a => a.UserId == id)
                                 .Select(a => new HighScoreViewModel
                                 {
@@ -59,6 +60,7 @@ namespace cis174GameWebSite.Controllers.api
 
             _logger.LogInformation($"High Scores retrieved for {id}");
             return Ok(_context.HighScoreViewModel
+                                .OrderByDescending(a => a.Score).Take(10)
                                 .Where(a => a.UserId == id)
                                 .Select(a => new HighScoreViewModel
                                 {
