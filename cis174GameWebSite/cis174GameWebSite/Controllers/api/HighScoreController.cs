@@ -25,7 +25,7 @@ namespace cis174GameWebSite.Controllers.api
             _logger = logger;
         }
 
-        // GET: api/HighScore
+        //GET: api/HighScore
         [HttpGet]
         public IEnumerable<HighScoreViewModel> GetHighScoreViewModel()
         {
@@ -33,9 +33,8 @@ namespace cis174GameWebSite.Controllers.api
         }
 
         //GET: api/HighScore/5
-        [HttpGet]
-        [Route("getscores")]
-        public async Task<IActionResult> GetHighScoresForUser([FromBody] HighScoreViewModel highScore)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetHighScoresForUser([FromRoute] string id)
         {
             if (!ModelState.IsValid)
             {
@@ -43,10 +42,9 @@ namespace cis174GameWebSite.Controllers.api
                 return BadRequest(ModelState);
             }
 
-            //var highScoreViewModel = await _context.HighScoreViewModel.FindAsync(id);
-
             var highScores = _context.HighScoreViewModel
-                                .Where(a => a.UserId == highScore.UserId)
+                                .OrderByDescending(a => a.Score).Take(10)
+                                .Where(a => a.UserId == id)
                                 .Select(a => new HighScoreViewModel
                                 {
                                     ScoreId = a.ScoreId,
@@ -56,12 +54,20 @@ namespace cis174GameWebSite.Controllers.api
 
             if (highScores == null)
             {
-                _logger.LogWarning($"Highscores not found {highScore.UserId}");
+                _logger.LogWarning($"Highscores not found {id}");
                 return NotFound();
             }
 
-            _logger.LogInformation($"High Scores retrieved for {highScore.UserId}");
-            return Ok(highScores);
+            _logger.LogInformation($"High Scores retrieved for {id}");
+            return Ok(_context.HighScoreViewModel
+                                .OrderByDescending(a => a.Score).Take(10)
+                                .Where(a => a.UserId == id)
+                                .Select(a => new HighScoreViewModel
+                                {
+                                    ScoreId = a.ScoreId,
+                                    Score = a.Score,
+                                    UserId = a.UserId,
+                                }));
         }
 
         // POST: api/HighScore
@@ -83,6 +89,7 @@ namespace cis174GameWebSite.Controllers.api
 
         // DELETE: api/HighScore/5
         [HttpDelete("{id}")]
+        [Route("delete")]
         public async Task<IActionResult> DeleteHighScoreViewModel([FromRoute] int id)
         {
             if (!ModelState.IsValid)
