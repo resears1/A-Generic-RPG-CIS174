@@ -35,7 +35,6 @@ public class Register : MonoBehaviour
         user = userIn.text;
         pass = passIn.text;
         StartCoroutine(RegisterUser());
-        SceneManager.LoadScene("main");
     }
 
     public IEnumerator RegisterUser()
@@ -48,39 +47,43 @@ public class Register : MonoBehaviour
             Debug.LogError("Passwords do not match.");
             Error("Passwords do not match.");
         }
-        string send = "{ \"Email\": \"" + user + "\", \"Password\": \"" + pass + "\", \"ConfirmPassword\": \"" + pass + "\" }";
-        Debug.Log(send);
-        byte[] myData = System.Text.Encoding.UTF8.GetBytes(send);
-        UnityWebRequest www = UnityWebRequest.Put("https://cis174gamewebsite.azurewebsites.net/api/user/reg", myData);
-        www.SetRequestHeader("Content-Type", "application/json");
-        yield return www.SendWebRequest();
-
-        if (www.isNetworkError || www.isHttpError)
-        {
-            Debug.LogError(www.error);
-            Error("An error occurred during registration.\nPlease try again");
-        }
         else
         {
-            Debug.Log("Upload complete!");
-            errorText.text = "";
+            string send = "{ \"Email\": \"" + user + "\", \"Password\": \"" + pass + "\", \"ConfirmPassword\": \"" + pass + "\" }";
+            Debug.Log(send);
+            byte[] myData = System.Text.Encoding.UTF8.GetBytes(send);
+            UnityWebRequest www = UnityWebRequest.Put("https://cis174gamewebsite.azurewebsites.net/api/user/reg", myData);
+            www.SetRequestHeader("Content-Type", "application/json");
+            yield return www.SendWebRequest();
 
-            string json = www.downloadHandler.text;
-            JArray parsedArray = JArray.Parse(json);
-            foreach (JObject parsedObject in parsedArray.Children<JObject>())
+            if (www.isNetworkError || www.isHttpError)
             {
-                foreach (JProperty parsedProperty in parsedObject.Properties())
+                Debug.LogError(www.error);
+                Error("An error occurred during registration.\nPlease try again");
+            }
+            else
+            {
+                Debug.Log("Upload complete!");
+                errorText.text = "";
+
+                string json = www.downloadHandler.text;
+                JArray parsedArray = JArray.Parse(json);
+                foreach (JObject parsedObject in parsedArray.Children<JObject>())
                 {
-                    string propertyName = parsedProperty.Name;
-                    if (propertyName.Equals("id"))
+                    foreach (JProperty parsedProperty in parsedObject.Properties())
                     {
-                        string propertyValue = (string)parsedProperty.Value;
-                        UserId = propertyValue;
-                        Debug.Log(UserId);
-                        break;
+                        string propertyName = parsedProperty.Name;
+                        if (propertyName.Equals("id"))
+                        {
+                            string propertyValue = (string)parsedProperty.Value;
+                            UserId = propertyValue;
+                            Debug.Log(UserId);
+                            break;
+                        }
                     }
                 }
             }
+            SceneManager.LoadScene("main");
         }
 
     }
