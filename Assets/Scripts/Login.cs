@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using Newtonsoft.Json.Linq;
+using UnityEngine.SceneManagement;
 
 public class Login : MonoBehaviour
 {
@@ -20,15 +21,14 @@ public class Login : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(login());
     }
 
     // To set an error, you can set errorText.text
     // Maybe potentially pass in a parameter and use string concatonation for each error
     // This one is currently not being called, unlike Register's version
-    public void Error()
+    public void Error(string err)
     {
-        errorText.text = "Error: Insert Error here.";
+        errorText.text = "Error: " + err;
     }
 
 
@@ -54,11 +54,13 @@ public class Login : MonoBehaviour
 
         if (www.isNetworkError || www.isHttpError)
         {
-            Debug.Log(www.error);
+            Debug.LogError(www.error);
+            Error("Login Failed. Please try again.");
         }
         else
         {
             Debug.Log("Upload complete!");
+            errorText.text = "";
 
             string json = www.downloadHandler.text;
             JArray parsedArray = JArray.Parse(json);
@@ -76,7 +78,7 @@ public class Login : MonoBehaviour
                     }
                 }
             }
-
+            SceneManager.LoadScene("main");
         }
     }
 }

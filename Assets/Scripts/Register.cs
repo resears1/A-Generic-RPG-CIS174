@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using Newtonsoft.Json.Linq;
+using UnityEngine.SceneManagement;
 
 public class Register : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class Register : MonoBehaviour
         user = userIn.text;
         pass = passIn.text;
         StartCoroutine(RegisterUser());
+        SceneManager.LoadScene("main");
     }
 
     public IEnumerator RegisterUser()
@@ -43,6 +45,7 @@ public class Register : MonoBehaviour
         // Placeholder to confirm password
         if (passConfirm != pass)
         {
+            Debug.LogError("Passwords do not match.");
             Error("Passwords do not match.");
         }
         string send = "{ \"Email\": \"" + user + "\", \"Password\": \"" + pass + "\", \"ConfirmPassword\": \"" + pass + "\" }";
@@ -54,11 +57,14 @@ public class Register : MonoBehaviour
 
         if (www.isNetworkError || www.isHttpError)
         {
-            Debug.Log(www.error);
+            Debug.LogError(www.error);
+            Error("An error occurred during registration.\nPlease try again");
         }
         else
         {
             Debug.Log("Upload complete!");
+            errorText.text = "";
+
             string json = www.downloadHandler.text;
             JArray parsedArray = JArray.Parse(json);
             foreach (JObject parsedObject in parsedArray.Children<JObject>())
