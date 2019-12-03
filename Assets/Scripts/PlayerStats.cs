@@ -12,10 +12,16 @@ public class PlayerStats : MonoBehaviour
 
     public PlayerHealthManager healthManager;
 
+    public EnemyHealthManager enemy;
+
+    public HurtPlayer enemyDmg;
+
     // Start is called before the first frame update
     void Start()
     {
         atk = 5;
+        enemy = FindObjectOfType<EnemyHealthManager>();
+        enemyDmg = FindObjectOfType<HurtPlayer>();
     }
 
     // Update is called once per frame
@@ -24,9 +30,13 @@ public class PlayerStats : MonoBehaviour
         if(currentXP >= toNextLvl[currentLvl])
         {
             currentLvl++;
+            currentXP = 0;
             healthManager.hpMax += 10;
             healthManager.hpCurrent = healthManager.hpMax;
-            atk += 3;
+            atk += 5;
+            enemyDmg.setDamage *= 2;
+            enemy.enemyHpMax += 10;
+            enemy.XP += 5;
         }
     }
 

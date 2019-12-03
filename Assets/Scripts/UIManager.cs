@@ -15,6 +15,17 @@ public class UIManager : MonoBehaviour
     public Text LvlText;
     public Slider XPBar;
 
+    public Text score1;
+    public Text score2;
+    public Text score3;
+    public Text score4;
+    public Text score5;
+    public Text score6;
+    public Text score7;
+    public Text score8;
+    public Text score9;
+    public Text score10;
+
     private static bool UIExist;
 
     // Start is called before the first frame update
