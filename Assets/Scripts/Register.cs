@@ -49,7 +49,7 @@ public class Register : MonoBehaviour
         }
         else
         {
-            string send = "{ \"Email\": \"" + user + "\", \"Password\": \"" + pass + "\", \"ConfirmPassword\": \"" + pass + "\" }";
+            string send = "{ \"Email\": \"" + user + "\", \"Password\": \"" + pass + "\", \"ConfirmPassword\": \"" + passConfirm + "\" }";
             Debug.Log(send);
             byte[] myData = System.Text.Encoding.UTF8.GetBytes(send);
             UnityWebRequest www = UnityWebRequest.Put("https://cis174gamewebsite.azurewebsites.net/api/user/reg", myData);
@@ -82,10 +82,9 @@ public class Register : MonoBehaviour
                         }
                     }
                 }
+                SceneManager.LoadScene("main");
             }
-            SceneManager.LoadScene("main");
         }
-
     }
 
 }
