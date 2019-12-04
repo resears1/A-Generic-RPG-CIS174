@@ -14,14 +14,10 @@ public class PlayerStats : MonoBehaviour
 
     public EnemyHealthManager enemy;
 
-    public HurtPlayer enemyDmg;
-
     // Start is called before the first frame update
     void Start()
     {
         atk = 5;
-        enemy = FindObjectOfType<EnemyHealthManager>();
-        enemyDmg = FindObjectOfType<HurtPlayer>();
     }
 
     // Update is called once per frame
@@ -34,9 +30,6 @@ public class PlayerStats : MonoBehaviour
             healthManager.hpMax += 10;
             healthManager.hpCurrent = healthManager.hpMax;
             atk += 5;
-            enemyDmg.setDamage *= 2;
-            enemy.enemyHpMax += 10;
-            enemy.XP += 5;
         }
     }
 

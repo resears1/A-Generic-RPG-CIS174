@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class EnemyHealthManager : MonoBehaviour
 {
+    public PlayerStats playerStats;
+
+    public EnemyStats slime;
+
     public int enemyHpMax;
     public int enemyHpCurrent;
-
-    private PlayerStats playerStats;
 
     public int XP;
     public int ScoreReward;
 
+    public HurtPlayer enemyDmg;
+
+    public float timeBeforeLevel;
+    private float timer;
+
     void Start()
     {
-        enemyHpCurrent = enemyHpMax;
-
+        enemyDmg = FindObjectOfType<HurtPlayer>();
+        slime = FindObjectOfType<EnemyStats>();
         playerStats = FindObjectOfType<PlayerStats>();
+        enemyHpMax = slime.enemyMaxHp;
+        enemyHpCurrent = enemyHpMax;
+        timer = timeBeforeLevel;
     }
 
 
@@ -25,8 +35,14 @@ public class EnemyHealthManager : MonoBehaviour
         if (enemyHpCurrent <= 0)
         {
             Destroy(gameObject);
-            Score.score += ScoreReward;
-            playerStats.AddXP(XP);
+            Score.score += slime.enemyScore;
+            playerStats.AddXP(slime.enemyXp);
+        }
+
+        if (enemyHpMax < slime.enemyMaxHp)
+        {
+            enemyHpMax = slime.enemyMaxHp;
+            enemyHpCurrent = enemyHpMax;
         }
     }
 

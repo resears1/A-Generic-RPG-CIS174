@@ -67,5 +67,7 @@ public class SlimeController : MonoBehaviour
                 player.SetActive(true);
             }
         }
+
+
     }
 }
