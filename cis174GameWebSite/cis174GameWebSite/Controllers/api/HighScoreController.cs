@@ -42,20 +42,32 @@ namespace cis174GameWebSite.Controllers.api
                 return BadRequest(ModelState);
             }
 
-            var highScores = _context.HighScoreViewModel
-                                .OrderByDescending(a => a.Score).Take(10)
+            Array highScores = _context.HighScoreViewModel
+                                .OrderByDescending(a => a.Score)
                                 .Where(a => a.UserId == id)
                                 .Select(a => new HighScoreViewModel
                                 {
                                     ScoreId = a.ScoreId,
                                     Score = a.Score,
                                     UserId = a.UserId,
-                                });
+                                }).ToArray();
 
             if (highScores == null)
             {
                 _logger.LogWarning($"Highscores not found {id}");
                 return NotFound();
+            }
+
+            if(highScores.Length < 10) {
+                return Ok(_context.HighScoreViewModel
+                                .OrderByDescending(a => a.Score)
+                                .Where(a => a.UserId == id)
+                                .Select(a => new HighScoreViewModel
+                                {
+                                    ScoreId = a.ScoreId,
+                                    Score = a.Score,
+                                    UserId = a.UserId,
+                                }));
             }
 
             _logger.LogInformation($"High Scores retrieved for {id}");
