@@ -64,6 +64,10 @@ public class UIManager : MonoBehaviour
         screenHolder = deathScreen;
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
     public void Reload()
     {
         playerHealth.hpCurrent = playerHealth.hpMax;
@@ -109,6 +113,11 @@ public class UIManager : MonoBehaviour
         HPText.text = "HP: " + playerHealth.hpCurrent + "/" + playerHealth.hpMax;
         XPText.text = "XP: " + playerStats.currentXP + "/" + playerStats.toNextLvl[playerStats.currentLvl];
         LvlText.text = "Level: " + playerStats.currentLvl;
+
+        if (Input.GetKeyDown("escape"))
+        {
+            Application.Quit();
+        }
     }
 
     public static void CreateLeaderboard(ArrayList scores)
