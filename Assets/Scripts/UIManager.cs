@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -46,6 +47,7 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
         playerStats = GetComponent<PlayerStats>();
         scoreboard = new ArrayList();
         scoreboard.Add(score1);
@@ -60,6 +62,40 @@ public class UIManager : MonoBehaviour
         scoreboard.Add(score10);
         deathScreen.SetActive(false);
         screenHolder = deathScreen;
+    }
+
+    public void Reload()
+    {
+        playerHealth.hpCurrent = playerHealth.hpMax;
+        SceneManager.LoadScene("main");
+        screenHolder.SetActive(false);
+        playerHealth.gameObject.SetActive(true);
+    }
+
+    public void OnDeath()
+    {
+        if (!UIExist)
+        {
+            UIExist = true;
+            DontDestroyOnLoad(transform.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    /*
+        playerStats = GetComponent<PlayerStats>();
+        scoreboard = new ArrayList();
+        scoreboard.Add(score1);
+        scoreboard.Add(score2);
+        scoreboard.Add(score3);
+        scoreboard.Add(score4);
+        scoreboard.Add(score5);
+        scoreboard.Add(score6);
+        scoreboard.Add(score7);
+        scoreboard.Add(score8);
+        scoreboard.Add(score9);
+        scoreboard.Add(score10);*/
     }
 
     // Update is called once per frame
