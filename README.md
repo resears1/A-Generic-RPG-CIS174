@@ -1,6 +1,11 @@
 # A-Generic-RPG-CIS174
 CIS174 Final Project
 
+Controls:
+Movement: WASD/ Arrow Keys
+Attack: Spacebar/ Mouse 0
+Quit: Escape
+
 Web / API Access
 When a user registers an account through the application, their data is being sent via JSON to "https://cis174gamewebsite.azurewebsites.net/api/user/reg". If there is an error with the request they will not be able to play the game and an error will appear on the screen asking them to try again.
 
