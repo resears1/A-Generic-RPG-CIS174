@@ -28,7 +28,6 @@ ScriptsOnlyBuild:
     - SuperTiled2Unity.SuperTileLayer
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -58,27 +57,27 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9692}
+      Script: {instanceID: 9688}
     - Class: 114
-      Script: {instanceID: 9726}
+      Script: {instanceID: 9722}
     - Class: 114
-      Script: {instanceID: 9866}
+      Script: {instanceID: 9862}
     - Class: 114
-      Script: {instanceID: 9910}
+      Script: {instanceID: 9906}
     - Class: 114
-      Script: {instanceID: 10366}
+      Script: {instanceID: 10362}
     - Class: 114
-      Script: {instanceID: 10778}
+      Script: {instanceID: 10774}
     - Class: 114
-      Script: {instanceID: 10864}
+      Script: {instanceID: 10860}
     - Class: 114
-      Script: {instanceID: 10994}
+      Script: {instanceID: 10990}
     - Class: 114
-      Script: {instanceID: 11310}
+      Script: {instanceID: 11306}
     - Class: 114
-      Script: {instanceID: 11726}
+      Script: {instanceID: 11722}
     - Class: 114
-      Script: {instanceID: 90074}
+      Script: {instanceID: 11808}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -127,63 +126,63 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9692}
+      Script: {instanceID: 9688}
     - Class: 114
-      Script: {instanceID: 9866}
+      Script: {instanceID: 9862}
     - Class: 114
-      Script: {instanceID: 9868}
+      Script: {instanceID: 9864}
     - Class: 114
-      Script: {instanceID: 9910}
+      Script: {instanceID: 9906}
     - Class: 114
-      Script: {instanceID: 10050}
+      Script: {instanceID: 10046}
     - Class: 114
-      Script: {instanceID: 10338}
+      Script: {instanceID: 10334}
     - Class: 114
-      Script: {instanceID: 10366}
+      Script: {instanceID: 10362}
     - Class: 114
-      Script: {instanceID: 10494}
+      Script: {instanceID: 10490}
     - Class: 114
-      Script: {instanceID: 10530}
+      Script: {instanceID: 10526}
     - Class: 114
-      Script: {instanceID: 10560}
+      Script: {instanceID: 10556}
     - Class: 114
-      Script: {instanceID: 10584}
+      Script: {instanceID: 10580}
     - Class: 114
-      Script: {instanceID: 10722}
+      Script: {instanceID: 10718}
     - Class: 114
-      Script: {instanceID: 10736}
+      Script: {instanceID: 10732}
     - Class: 114
-      Script: {instanceID: 10778}
+      Script: {instanceID: 10774}
     - Class: 114
-      Script: {instanceID: 10964}
+      Script: {instanceID: 10960}
     - Class: 114
-      Script: {instanceID: 11042}
+      Script: {instanceID: 11038}
     - Class: 114
-      Script: {instanceID: 11052}
+      Script: {instanceID: 11048}
     - Class: 114
-      Script: {instanceID: 11102}
+      Script: {instanceID: 11098}
     - Class: 114
-      Script: {instanceID: 11126}
+      Script: {instanceID: 11122}
     - Class: 114
-      Script: {instanceID: 11216}
+      Script: {instanceID: 11212}
     - Class: 114
-      Script: {instanceID: 11218}
+      Script: {instanceID: 11214}
     - Class: 114
-      Script: {instanceID: 11260}
+      Script: {instanceID: 11256}
     - Class: 114
-      Script: {instanceID: 11310}
+      Script: {instanceID: 11306}
+    - Class: 114
+      Script: {instanceID: 11632}
     - Class: 114
       Script: {instanceID: 11636}
     - Class: 114
-      Script: {instanceID: 11640}
+      Script: {instanceID: 11652}
     - Class: 114
-      Script: {instanceID: 11656}
+      Script: {instanceID: 11714}
     - Class: 114
-      Script: {instanceID: 11718}
+      Script: {instanceID: 11722}
     - Class: 114
-      Script: {instanceID: 11726}
-    - Class: 114
-      Script: {instanceID: 11768}
+      Script: {instanceID: 11764}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -911,4 +910,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/logon.unity
   - Assets/Scenes/main.unity
-  playerPath: C:/Users/Ricky/Desktop/CIS174 - Generic RPG/c#final.exe
+  playerPath: C:/Users/Ricky/Desktop/Generic RPG - CIS174 (game)/c#final.exe

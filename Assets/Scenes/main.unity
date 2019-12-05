@@ -2387,7 +2387,7 @@ PrefabInstance:
     - target: {fileID: 3882267209961807622, guid: b72cc045a60a7c34bbddf9d758302958,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.8
+      value: 4.77
       objectReference: {fileID: 0}
     - target: {fileID: 3882267209961807622, guid: b72cc045a60a7c34bbddf9d758302958,
         type: 3}
@@ -2459,11 +2459,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.23
       objectReference: {fileID: 0}
-    - target: {fileID: -6076943569536004719, guid: b72cc045a60a7c34bbddf9d758302958,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4297185581083311786, guid: b72cc045a60a7c34bbddf9d758302958,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -2499,21 +2494,6 @@ PrefabInstance:
       propertyPath: m_ChunkCullingBounds.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -5252896369531466701, guid: b72cc045a60a7c34bbddf9d758302958,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 274736791
-      objectReference: {fileID: 0}
-    - target: {fileID: -5252896369531466701, guid: b72cc045a60a7c34bbddf9d758302958,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: -5252896369531466701, guid: b72cc045a60a7c34bbddf9d758302958,
-        type: 3}
-      propertyPath: m_DetectChunkCullingBounds
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: -1794403083234932442, guid: b72cc045a60a7c34bbddf9d758302958,
         type: 3}
       propertyPath: m_DetectChunkCullingBounds
@@ -2617,6 +2597,26 @@ PrefabInstance:
     - target: {fileID: 7113177832333601251, guid: b72cc045a60a7c34bbddf9d758302958,
         type: 3}
       propertyPath: m_ChunkCullingBounds.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6076943569536004719, guid: b72cc045a60a7c34bbddf9d758302958,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5252896369531466701, guid: b72cc045a60a7c34bbddf9d758302958,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 274736791
+      objectReference: {fileID: 0}
+    - target: {fileID: -5252896369531466701, guid: b72cc045a60a7c34bbddf9d758302958,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -5252896369531466701, guid: b72cc045a60a7c34bbddf9d758302958,
+        type: 3}
+      propertyPath: m_DetectChunkCullingBounds
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8400030830567010100, guid: b72cc045a60a7c34bbddf9d758302958,
@@ -3883,6 +3883,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 971279572517487248, guid: 8c5daae1cd4189e4a9b4bea7abc8a046,
+        type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 338003832}
+    - target: {fileID: 971279572517487248, guid: 8c5daae1cd4189e4a9b4bea7abc8a046,
+        type: 3}
+      propertyPath: slime
+      value: 
+      objectReference: {fileID: 1714817643}
     - target: {fileID: 1365905345122549171, guid: 8c5daae1cd4189e4a9b4bea7abc8a046,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3939,16 +3949,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 971279572517487251, guid: 8c5daae1cd4189e4a9b4bea7abc8a046,
-        type: 3}
-      propertyPath: slime
-      value: 
-      objectReference: {fileID: 1714817643}
-    - target: {fileID: 971279572517487248, guid: 8c5daae1cd4189e4a9b4bea7abc8a046,
-        type: 3}
-      propertyPath: playerStats
-      value: 
-      objectReference: {fileID: 338003832}
-    - target: {fileID: 971279572517487248, guid: 8c5daae1cd4189e4a9b4bea7abc8a046,
         type: 3}
       propertyPath: slime
       value: 
